@@ -62,3 +62,15 @@ nothing but asks for 3+ years.
 | `assets/writing-style.md` | How notes are written |
 | `examples/` | Test postings and expected verdicts |
 | `reports/` | Output: one report per posting, plus `decisions.csv` |
+
+## Notes
+
+- **Groq free tier.** The project runs on `openai/gpt-oss-120b` via Groq, whose
+  free tier caps a request at 8,000 tokens per minute and 200K tokens per day.
+  To fit, the stock `agents/fork-instructions.md` and
+  `agents/files-instructions.md` are trimmed to the parts these agents use (so
+  `zen check` warns that they differ from the stock files), the house rules are
+  two lines, and the specialists keep quotes to 15 words and answers under 300
+  words. On a paid tier or another provider, change the model in `agents.yaml`
+  and none of that is needed.
+- **No secrets in the repo.** The key lives in `.env`, which is git-ignored.
