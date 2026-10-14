@@ -1,0 +1,57 @@
+# Who exists, and what they may reach for.
+#
+# This implements the Models, Agents, Tools and boundaries, and Environment
+# sections of SPECIFICATION.md. Change what the system does there first, then
+# bring this file to match it.
+#
+version: 1
+
+# One model for every agent. Swap it here and the whole project moves - any
+# provider zen supports works (e.g. `openai:gpt-5.4-mini` with an OpenAI key).
+models:
+    claude:
+        provider: anthropic
+        model: claude-sonnet-5-5
+        # Anthropic requires an output cap; a full report fits well inside it.
+        maxTokens: 8192
+
+model: claude
+
+# assets/ (profile, rules, writing style) is mounted read-only at /assets for
+# every agent by convention.
+
+# No sandbox and no memory store: the agents only read the posting and the
+# assets, and write reports. reports/decisions.csv is the record across runs.
+
+agents:
+    - name: triage
+      default: true
+      description: >-
+          Entry point. Takes one job posting, runs extractor -> screener ->
+          writer, and writes reports/<company>-<role>.md plus a line in
+          reports/decisions.csv.
+      tools: [files:*, -delete_file, -move_file]
+      fork:
+          agents: [extractor, screener, writer]
+          maxBranches: 1
+
+    - name: extractor
+      description: >-
+          Turns a job posting into the fields listed in /assets/rules.md, each
+          with the exact sentence it came from, or "not stated". Use it first,
+          with the full posting text.
+      tools: [read_file, list_dir, find_files]
+
+    - name: screener
+      description: >-
+          Applies the hard rules in /assets/rules.md to extracted facts and the
+          candidate profile. Returns APPLY, SKIP or ASK with a rule table and a
+          0-10 fit score. Use it with the extractor's output.
+      tools: [read_file, list_dir, find_files]
+
+    - name: writer
+      description: >-
+          Drafts a <=120-word application note and screening answers from
+          /assets/profile.md and /assets/writing-style.md. Use it only for APPLY
+          or ASK verdicts.
+      tools: [read_file, list_dir, find_files]
