@@ -17,5 +17,5 @@ on-site days, years with a named technology, current location), give the answer
 from `/assets/profile.md` § Standard answers. Where the profile has no answer,
 write `ASK CANDIDATE: <the question>` - never fill it in.
 
-Return the note and the answers in your answer; the agent that forked you sees
+Keep the answers to one line each. Return the note and the answers in your answer; the agent that forked you sees
 nothing else.

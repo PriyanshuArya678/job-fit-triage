@@ -29,9 +29,10 @@ the floor buried in the last paragraph.
 
 ## Models
 
-- `claude` - `anthropic:claude-sonnet-5-5`, one model for the whole project,
-  used by every agent. Named once in `agents.yaml` so it can be swapped in one
-  place; the prompts depend on no particular model.
+- `main` - `openai/gpt-oss-120b` on Groq (OpenAI-compatible endpoint, key in
+  `OPENAI_API_KEY`), one model for the whole project, used by every agent. Named
+  once in `agents.yaml` so it can be swapped in one place; the prompts depend
+  on no particular model.
 
 ## Setup
 

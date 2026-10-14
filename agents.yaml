@@ -6,16 +6,23 @@
 #
 version: 1
 
-# One model for every agent. Swap it here and the whole project moves - any
-# provider zen supports works (e.g. `openai:gpt-5.4-mini` with an OpenAI key).
-models:
-    claude:
-        provider: anthropic
-        model: claude-sonnet-5-5
-        # Anthropic requires an output cap; a full report fits well inside it.
-        maxTokens: 8192
+# Groq's OpenAI-compatible endpoint. The key is read from OPENAI_API_KEY (zen's pre-run check only knows the standard names)
+# (set it in .env, which is git-ignored, or in your shell) - never written here.
+providers:
+    groq:
+        kind: openai-compatible
+        baseURL: https://api.groq.com/openai/v1
+        apiKeyEnv: OPENAI_API_KEY
 
-model: claude
+# One model for every agent. Swap it here and the whole project moves - any
+# provider zen supports works (e.g. `anthropic:claude-sonnet-5-5`).
+models:
+    main:
+        provider: groq
+        model: openai/gpt-oss-120b
+        api: chat
+
+model: main
 
 # assets/ (profile, rules, writing style) is mounted read-only at /assets for
 # every agent by convention.

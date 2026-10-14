@@ -39,7 +39,7 @@ triage (entry)
 
 ```sh
 npm i -g @zenera/cli
-zen key add anthropic          # or swap the model in agents.yaml for another provider
+export OPENAI_API_KEY=<groq key>   # Groq is OpenAI-compatible; or put it in .env (git-ignored)
 zen init .                     # registers this cloned folder
 zen check .
 zen run . "triage examples/apply-ai-platform.md"

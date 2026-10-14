@@ -29,5 +29,5 @@ profile, weighting the ones the posting calls required over nice-to-have. List
 the matched skills and the missing ones. The score never changes the verdict -
 a 9 that breaks a hard rule is still SKIP.
 
-Return the rule table, the verdict line, the deciding rule and the fit section
+Keep quotes to 15 words and the answer under 300 words. Return the rule table, the verdict line, the deciding rule and the fit section
 in your answer; nothing you read is visible to the agent that forked you.

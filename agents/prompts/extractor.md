@@ -8,7 +8,8 @@ one row:
 
 - **Value** is what the posting states, normalised as the field describes
   (years as numbers, salary in LPA, location as a city).
-- **Quote** is the exact sentence or phrase it came from, verbatim, in quotes.
+- **Quote** is the exact phrase it came from, verbatim, in quotes, at most 15
+  words.
 - If the posting does not state it, the value is `not stated` and the quote is
   empty. Never infer a field from the company name or from what is typical.
 
@@ -22,5 +23,5 @@ Two cases to report carefully, because they decide verdicts:
   "3 months", "hourly" all count, quoted.
 
 End with a one-line list of the skills and technologies the posting names.
-Return the whole table in your answer - the agent that forked you sees only your
+Keep the answer under 300 words. Return the whole table in your answer - the agent that forked you sees only your
 answer, not the file you read.
